@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Create extends Component {
+//changed from create to edit
+class Edit extends Component {
     constructor() {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,6 +16,23 @@ class Create extends Component {
         }
     }
 
+    //pull id out and send back record happens async
+    //read records back update state
+    //updates everything below
+    componentDidMount(){
+            console.log(this.props.match.params.id)
+        	axios.get('http://localhost:4000/api/movies/' + this.props.match.params.id)
+            .then((response)=>{
+                this.setState({
+                    Title:response.data.Title,
+                    Year:response.data.Year,
+                    Poster:response.data.Poster,
+                    _id:response.data._id
+                })
+            })
+            .catch()
+    }
+
     handleSubmit(event) {
         console.log("Name: " +this.state.Title+
         " Year: " + this.state.Year +
@@ -24,14 +42,18 @@ class Create extends Component {
             Title: this.state.Title,
             Year: this.state.Year,
             Poster: this.state.Poster
-        }
+        }        
+
+        axios.put('http://localhost:4000/api/movies/'+ this.state._id, NewMovie)
+       .then((response)=>{console.log(response.data)})
+       .catch();
 
        event.preventDefault();
-        this.setState({
-            Title:'',
-            Year:'',
-            Poster:''
-        });
+       this.setState({
+           Title:'',
+           Year:'',
+           Poster:''
+       })
     }
 
     onChangeMovieName(event) {
@@ -89,4 +111,4 @@ class Create extends Component {
         );
     }
 }
-export default Create;
+export default Edit;
