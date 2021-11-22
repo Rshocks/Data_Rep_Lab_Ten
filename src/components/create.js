@@ -25,6 +25,14 @@ class Create extends Component {
             Year: this.state.Year,
             Poster: this.state.Poster
         }
+        
+        axios.post('http://localhost:4000/api/movies', NewMovie)
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
 
        event.preventDefault();
         this.setState({
@@ -53,7 +61,7 @@ class Create extends Component {
     render() {
         return (
             <div>
-                <h1>This is my Edit Component!</h1>
+                <h1>This is my Create Component!</h1>
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="form-group">

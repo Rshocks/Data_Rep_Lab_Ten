@@ -26,6 +26,10 @@ app.use(bodyParser.json())
 const Connection = 'mongodb+srv://Admin:Vanyolo1@cluster0.tvdpt.mongodb.net/movies?retryWrites=true&w=majority' ;
 mongoose.connect(Connection, {useNewUrlParser: true});
 
+async function main() {
+    await mongoose.connect(Connection);
+  }
+
 const Schema = mongoose.Schema;
 
 //generating schema what database will look like
@@ -67,6 +71,17 @@ app.post('/api/movies', (req,res)=>{
         year:req.body.Year,
         poster:req.body.Poster
     })
+})
+
+app.delete('/api/movies/:id', (req, res)=>{
+    console.log("Delete"+req.params.id)
+
+    MovieModel.deleteOne({_id: req.params.id},
+        (error,data)=>{
+            if(error)
+            res.send(error);
+            res.send(data);
+        })
 })
 
 app.put('/api/movies/id:', (req,res)=>{

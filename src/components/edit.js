@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-//changed from create to edit
 class Edit extends Component {
     constructor() {
         super();
