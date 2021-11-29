@@ -65,7 +65,7 @@ class Create extends Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="form-group">
-                        <label>Edit Movie Name: </label>
+                        <label>Movie Name: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.Title}
@@ -73,7 +73,7 @@ class Create extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Edit Movie Year: </label>
+                        <label>Movie Year: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.Year}
@@ -81,7 +81,7 @@ class Create extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Edit Movie Poster: </label>
+                        <label>Movie Poster: </label>
                         <textarea type="text"
                             className="form-control"
                             value={this.state.Poster}

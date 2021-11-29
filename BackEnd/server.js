@@ -4,16 +4,21 @@ const port = 4000
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
+
+//telling where build folder will be 
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static'))); // telling where static folder is for js etc
 
 //cors helps put data to front end
-app.use(cors());
+/*app.use(cors());
 app.use(function(req, res, next) {
 res.header("Access-Control-Allow-Origin", "*");
 res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 res.header("Access-Control-Allow-Headers",
 "Origin, X-Requested-With, Content-Type, Accept");
 next();
-});
+});*/
 
 //parser middleware allows intercept of main body
 //parse app/x-ww-form-urlencoded
@@ -108,6 +113,11 @@ app.get('/api/movies', (req, res) => {
         res.json(data);
     })
 })
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
+    });
+    
 
 //http listen method to listen to request on certain port
 app.listen(port, () => {
